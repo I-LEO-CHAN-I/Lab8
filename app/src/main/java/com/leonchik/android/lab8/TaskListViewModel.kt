@@ -12,21 +12,11 @@ class TaskListViewModel (private val taskDao: TaskDao):ViewModel() {
     private val ts=MutableLiveData<List<Task>>()
     val tasks: LiveData<List<Task>> get() = ts
 
-    fun addTask(content:String,priority:Int)
-    {
-        val task=Task(content=content,priority=priority)
-        viewModelScope.launch{
-            taskDao.addTask(task)
-            getTasks()
-        }
-
-    }
-
     fun getTasks()
     {
         viewModelScope.launch{
-            val tasks_list=taskDao.getTask()
-            ts.postValue(tasks_list)
+            val tasksList=taskDao.getTask()
+            ts.postValue(tasksList)
         }
     }
 

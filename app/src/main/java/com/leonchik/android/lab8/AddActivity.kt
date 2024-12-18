@@ -25,11 +25,11 @@ class AddActivity : AppCompatActivity() {
                 else -> 3
             }
             val task = Task(content = content, priority = priority)
-            AddTask(task)
+            addTask(task)
             finish()
         }
     }
-    private fun AddTask(task: Task) {
+    private fun addTask(task: Task) {
         CoroutineScope(Dispatchers.IO).launch {
             taskDao.addTask(task)
         }

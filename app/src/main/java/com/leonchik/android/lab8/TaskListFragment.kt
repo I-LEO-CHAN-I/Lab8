@@ -1,5 +1,6 @@
 package com.leonchik.android.lab8
 
+import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
@@ -39,19 +40,19 @@ class TaskListFragment : Fragment(R.layout.fragment_task_list){
 
     private inner class TaskHolder(view: View) : RecyclerView.ViewHolder(view) {
         private lateinit var task: Task
-        private val task_content: TextView = itemView.findViewById(R.id.taskContent)
-        private val task_circle: FrameLayout = itemView.findViewById(R.id.priorityCircle)
-        private val task_num: TextView = itemView.findViewById(R.id.priorityNumber)
+        private val taskContent: TextView = itemView.findViewById(R.id.taskContent)
+        private val taskCircle: FrameLayout = itemView.findViewById(R.id.priorityCircle)
+        private val taskNum: TextView = itemView.findViewById(R.id.priorityNumber)
 
         fun bind(task: Task) {
             this.task = task
-            task_content.text = task.content
+            taskContent.text = task.content
             when (task.priority) {
-                1 -> task_circle.backgroundTintList = ColorStateList.valueOf(Color.RED)
-                2 -> task_circle.backgroundTintList = ColorStateList.valueOf(Color.YELLOW)
-                3 -> task_circle.backgroundTintList = ColorStateList.valueOf(Color.GREEN)
+                1 -> taskCircle.backgroundTintList = ColorStateList.valueOf(Color.RED)
+                2 -> taskCircle.backgroundTintList = ColorStateList.valueOf(Color.YELLOW)
+                3 -> taskCircle.backgroundTintList = ColorStateList.valueOf(Color.GREEN)
             }
-            task_num.text = task.priority.toString()
+            taskNum.text = task.priority.toString()
         }
     }
     private inner class TaskAdapter(var tasks: MutableList<Task>) : RecyclerView.Adapter<TaskHolder>() {
@@ -68,6 +69,7 @@ class TaskListFragment : Fragment(R.layout.fragment_task_list){
             holder.bind(task)
         }
 
+        @SuppressLint("NotifyDataSetChanged")
         fun updateTasks(newTasks: List<Task>) {
             tasks.clear()
             tasks.addAll(newTasks)
