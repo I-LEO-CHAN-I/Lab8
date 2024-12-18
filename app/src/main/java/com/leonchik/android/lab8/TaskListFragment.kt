@@ -32,6 +32,7 @@ class TaskListFragment : Fragment(R.layout.fragment_task_list){
         taskListViewModel.tasks.observe(viewLifecycleOwner){
                 tasks->adapter.updateTasks(tasks)
         }
+        taskListViewModel.getTasks()
 
         swipeToDel()
     }
